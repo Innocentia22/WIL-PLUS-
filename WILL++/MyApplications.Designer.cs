@@ -30,8 +30,6 @@
         {
             pnlSidebar = new Panel();
             btnLogout = new Button();
-            btnMessages = new Button();
-            btnResources = new Button();
             btnNotifications = new Button();
             btnMyProfile = new Button();
             btnMyApplications = new Button();
@@ -68,8 +66,6 @@
             // 
             pnlSidebar.BackColor = Color.FromArgb(8, 33, 61);
             pnlSidebar.Controls.Add(btnLogout);
-            pnlSidebar.Controls.Add(btnMessages);
-            pnlSidebar.Controls.Add(btnResources);
             pnlSidebar.Controls.Add(btnNotifications);
             pnlSidebar.Controls.Add(btnMyProfile);
             pnlSidebar.Controls.Add(btnMyApplications);
@@ -79,8 +75,9 @@
             pnlSidebar.Controls.Add(label1);
             pnlSidebar.Dock = DockStyle.Left;
             pnlSidebar.Location = new Point(0, 0);
+            pnlSidebar.Margin = new Padding(3, 4, 3, 4);
             pnlSidebar.Name = "pnlSidebar";
-            pnlSidebar.Size = new Size(400, 661);
+            pnlSidebar.Size = new Size(457, 881);
             pnlSidebar.TabIndex = 1;
             // 
             // btnLogout
@@ -88,45 +85,23 @@
             btnLogout.BackColor = Color.FromArgb(22, 119, 255);
             btnLogout.FlatStyle = FlatStyle.Flat;
             btnLogout.ForeColor = Color.White;
-            btnLogout.Location = new Point(50, 606);
+            btnLogout.Location = new Point(57, 808);
+            btnLogout.Margin = new Padding(3, 4, 3, 4);
             btnLogout.Name = "btnLogout";
-            btnLogout.Size = new Size(315, 32);
+            btnLogout.Size = new Size(360, 43);
             btnLogout.TabIndex = 13;
             btnLogout.Text = "Logout";
             btnLogout.UseVisualStyleBackColor = false;
-            // 
-            // btnMessages
-            // 
-            btnMessages.BackColor = Color.FromArgb(22, 119, 255);
-            btnMessages.FlatStyle = FlatStyle.Flat;
-            btnMessages.ForeColor = Color.White;
-            btnMessages.Location = new Point(50, 478);
-            btnMessages.Name = "btnMessages";
-            btnMessages.Size = new Size(315, 32);
-            btnMessages.TabIndex = 12;
-            btnMessages.Text = "Messages";
-            btnMessages.UseVisualStyleBackColor = false;
-            // 
-            // btnResources
-            // 
-            btnResources.BackColor = Color.FromArgb(22, 119, 255);
-            btnResources.FlatStyle = FlatStyle.Flat;
-            btnResources.ForeColor = Color.White;
-            btnResources.Location = new Point(50, 545);
-            btnResources.Name = "btnResources";
-            btnResources.Size = new Size(315, 32);
-            btnResources.TabIndex = 11;
-            btnResources.Text = "Resources";
-            btnResources.UseVisualStyleBackColor = false;
             // 
             // btnNotifications
             // 
             btnNotifications.BackColor = Color.FromArgb(22, 119, 255);
             btnNotifications.FlatStyle = FlatStyle.Flat;
             btnNotifications.ForeColor = Color.White;
-            btnNotifications.Location = new Point(50, 416);
+            btnNotifications.Location = new Point(57, 555);
+            btnNotifications.Margin = new Padding(3, 4, 3, 4);
             btnNotifications.Name = "btnNotifications";
-            btnNotifications.Size = new Size(315, 32);
+            btnNotifications.Size = new Size(360, 43);
             btnNotifications.TabIndex = 10;
             btnNotifications.Text = "Notifications";
             btnNotifications.UseVisualStyleBackColor = false;
@@ -137,9 +112,10 @@
             btnMyProfile.FlatStyle = FlatStyle.Flat;
             btnMyProfile.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnMyProfile.ForeColor = Color.White;
-            btnMyProfile.Location = new Point(50, 349);
+            btnMyProfile.Location = new Point(57, 465);
+            btnMyProfile.Margin = new Padding(3, 4, 3, 4);
             btnMyProfile.Name = "btnMyProfile";
-            btnMyProfile.Size = new Size(315, 32);
+            btnMyProfile.Size = new Size(360, 43);
             btnMyProfile.TabIndex = 6;
             btnMyProfile.Text = "My Profile";
             btnMyProfile.UseVisualStyleBackColor = false;
@@ -149,9 +125,10 @@
             btnMyApplications.BackColor = Color.FromArgb(22, 119, 255);
             btnMyApplications.FlatStyle = FlatStyle.Flat;
             btnMyApplications.ForeColor = Color.DarkBlue;
-            btnMyApplications.Location = new Point(50, 284);
+            btnMyApplications.Location = new Point(57, 379);
+            btnMyApplications.Margin = new Padding(3, 4, 3, 4);
             btnMyApplications.Name = "btnMyApplications";
-            btnMyApplications.Size = new Size(315, 32);
+            btnMyApplications.Size = new Size(360, 43);
             btnMyApplications.TabIndex = 7;
             btnMyApplications.Text = "My Applications";
             btnMyApplications.UseVisualStyleBackColor = false;
@@ -163,9 +140,10 @@
             btnFindOpportunities.FlatStyle = FlatStyle.Flat;
             btnFindOpportunities.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnFindOpportunities.ForeColor = Color.White;
-            btnFindOpportunities.Location = new Point(50, 215);
+            btnFindOpportunities.Location = new Point(57, 287);
+            btnFindOpportunities.Margin = new Padding(3, 4, 3, 4);
             btnFindOpportunities.Name = "btnFindOpportunities";
-            btnFindOpportunities.Size = new Size(315, 32);
+            btnFindOpportunities.Size = new Size(360, 43);
             btnFindOpportunities.TabIndex = 8;
             btnFindOpportunities.Text = "Find Opportunities";
             btnFindOpportunities.UseVisualStyleBackColor = false;
@@ -176,9 +154,10 @@
             btnDashboard.FlatStyle = FlatStyle.Flat;
             btnDashboard.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnDashboard.ForeColor = Color.White;
-            btnDashboard.Location = new Point(50, 148);
+            btnDashboard.Location = new Point(57, 197);
+            btnDashboard.Margin = new Padding(3, 4, 3, 4);
             btnDashboard.Name = "btnDashboard";
-            btnDashboard.Size = new Size(315, 32);
+            btnDashboard.Size = new Size(360, 43);
             btnDashboard.TabIndex = 9;
             btnDashboard.Text = "Dashboard";
             btnDashboard.UseVisualStyleBackColor = false;
@@ -189,9 +168,9 @@
             label2.BackColor = Color.FromArgb(8, 33, 61);
             label2.Font = new Font("Segoe UI", 9.75F, FontStyle.Italic, GraphicsUnit.Point, 0);
             label2.ForeColor = Color.White;
-            label2.Location = new Point(89, 94);
+            label2.Location = new Point(102, 125);
             label2.Name = "label2";
-            label2.Size = new Size(108, 51);
+            label2.Size = new Size(143, 69);
             label2.TabIndex = 3;
             label2.Text = "Work-Intergrated \r\nLearning Plus\r\n\r\n";
             // 
@@ -200,9 +179,9 @@
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 42F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.White;
-            label1.Location = new Point(74, 20);
+            label1.Location = new Point(85, 27);
             label1.Name = "label1";
-            label1.Size = new Size(215, 74);
+            label1.Size = new Size(269, 93);
             label1.TabIndex = 2;
             label1.Text = "WIL++";
             // 
@@ -211,9 +190,9 @@
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 21.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label3.ForeColor = Color.FromArgb(23, 32, 51);
-            label3.Location = new Point(683, 38);
+            label3.Location = new Point(781, 51);
             label3.Name = "label3";
-            label3.Size = new Size(239, 40);
+            label3.Size = new Size(305, 50);
             label3.TabIndex = 14;
             label3.Text = "My Applications";
             // 
@@ -222,77 +201,81 @@
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 12F, FontStyle.Italic, GraphicsUnit.Point, 0);
             label4.ForeColor = Color.Gray;
-            label4.Location = new Point(683, 103);
+            label4.Location = new Point(781, 137);
             label4.Name = "label4";
-            label4.Size = new Size(215, 42);
+            label4.Size = new Size(271, 56);
             label4.TabIndex = 15;
             label4.Text = "Track your WIL and in-service\r\ntraining applications.\r\n";
             // 
             // panel1
             // 
             panel1.Controls.Add(label5);
-            panel1.Location = new Point(473, 199);
+            panel1.Location = new Point(541, 265);
+            panel1.Margin = new Padding(3, 4, 3, 4);
             panel1.Name = "panel1";
-            panel1.Size = new Size(135, 100);
+            panel1.Size = new Size(154, 133);
             panel1.TabIndex = 16;
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(25, 31);
+            label5.Location = new Point(29, 41);
             label5.Name = "label5";
-            label5.Size = new Size(62, 30);
+            label5.Size = new Size(78, 40);
             label5.TabIndex = 0;
             label5.Text = "5\r\nSubmitted\r\n";
             // 
             // panel2
             // 
             panel2.Controls.Add(label6);
-            panel2.Location = new Point(636, 199);
+            panel2.Location = new Point(727, 265);
+            panel2.Margin = new Padding(3, 4, 3, 4);
             panel2.Name = "panel2";
-            panel2.Size = new Size(135, 100);
+            panel2.Size = new Size(154, 133);
             panel2.TabIndex = 17;
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(27, 34);
+            label6.Location = new Point(31, 45);
             label6.Name = "label6";
-            label6.Size = new Size(79, 30);
+            label6.Size = new Size(100, 40);
             label6.TabIndex = 0;
             label6.Text = "2\r\nUnder Review";
             // 
             // panel3
             // 
             panel3.Controls.Add(label7);
-            panel3.Location = new Point(796, 199);
+            panel3.Location = new Point(910, 265);
+            panel3.Margin = new Padding(3, 4, 3, 4);
             panel3.Name = "panel3";
-            panel3.Size = new Size(135, 100);
+            panel3.Size = new Size(154, 133);
             panel3.TabIndex = 17;
             // 
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(33, 34);
+            label7.Location = new Point(38, 45);
             label7.Name = "label7";
-            label7.Size = new Size(63, 30);
+            label7.Size = new Size(80, 40);
             label7.TabIndex = 1;
             label7.Text = "2 \r\nShortlisted\r\n";
             // 
             // panel4
             // 
             panel4.Controls.Add(label8);
-            panel4.Location = new Point(954, 199);
+            panel4.Location = new Point(1090, 265);
+            panel4.Margin = new Padding(3, 4, 3, 4);
             panel4.Name = "panel4";
-            panel4.Size = new Size(135, 100);
+            panel4.Size = new Size(154, 133);
             panel4.TabIndex = 17;
             // 
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(22, 33);
+            label8.Location = new Point(25, 44);
             label8.Name = "label8";
-            label8.Size = new Size(57, 30);
+            label8.Size = new Size(72, 40);
             label8.TabIndex = 2;
             label8.Text = "2\r\nAccepted\r\n";
             // 
@@ -304,50 +287,64 @@
             dataGridView1.BorderStyle = BorderStyle.None;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Company, Position, Type, DateApplied, Status, Action });
-            dataGridView1.Location = new Point(473, 349);
+            dataGridView1.Location = new Point(541, 465);
+            dataGridView1.Margin = new Padding(3, 4, 3, 4);
             dataGridView1.MultiSelect = false;
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersVisible = false;
+            dataGridView1.RowHeadersWidth = 51;
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView1.Size = new Size(602, 101);
+            dataGridView1.Size = new Size(688, 135);
             dataGridView1.TabIndex = 18;
             // 
             // Company
             // 
             Company.HeaderText = "Company";
+            Company.MinimumWidth = 6;
             Company.Name = "Company";
+            Company.Width = 125;
             // 
             // Position
             // 
             Position.HeaderText = "Opportunity";
+            Position.MinimumWidth = 6;
             Position.Name = "Position";
+            Position.Width = 125;
             // 
             // Type
             // 
             Type.HeaderText = "Type";
+            Type.MinimumWidth = 6;
             Type.Name = "Type";
+            Type.Width = 125;
             // 
             // DateApplied
             // 
             DateApplied.HeaderText = "Date Applied";
+            DateApplied.MinimumWidth = 6;
             DateApplied.Name = "DateApplied";
+            DateApplied.Width = 125;
             // 
             // Status
             // 
             Status.HeaderText = "Status";
+            Status.MinimumWidth = 6;
             Status.Name = "Status";
+            Status.Width = 125;
             // 
             // Action
             // 
             Action.HeaderText = "Action";
+            Action.MinimumWidth = 6;
             Action.Name = "Action";
+            Action.Width = 125;
             // 
             // MyApplications
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(1184, 661);
+            ClientSize = new Size(1353, 881);
             Controls.Add(dataGridView1);
             Controls.Add(panel4);
             Controls.Add(panel3);
@@ -356,6 +353,7 @@
             Controls.Add(label4);
             Controls.Add(label3);
             Controls.Add(pnlSidebar);
+            Margin = new Padding(3, 4, 3, 4);
             MaximizeBox = false;
             Name = "MyApplications";
             StartPosition = FormStartPosition.CenterScreen;
@@ -379,8 +377,6 @@
 
         private Panel pnlSidebar;
         private Button btnLogout;
-        private Button btnMessages;
-        private Button btnResources;
         private Button btnNotifications;
         private Button btnMyProfile;
         private Button btnMyApplications;

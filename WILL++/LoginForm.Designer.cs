@@ -37,7 +37,7 @@
             label1 = new Label();
             pnlLogin = new Panel();
             lblNoAccount = new Label();
-            btnCreateAccount = new Button();
+            btnRegister = new Button();
             btnLogin = new Button();
             label10 = new Label();
             chkRemember = new CheckBox();
@@ -46,7 +46,7 @@
             textBox1 = new TextBox();
             txtStudentNumber = new Label();
             lblUserType = new Label();
-            cmbUserType = new ComboBox();
+            cmbRole = new ComboBox();
             label8 = new Label();
             label7 = new Label();
             pnlBrand.SuspendLayout();
@@ -140,7 +140,7 @@
             // 
             pnlLogin.BackColor = Color.White;
             pnlLogin.Controls.Add(lblNoAccount);
-            pnlLogin.Controls.Add(btnCreateAccount);
+            pnlLogin.Controls.Add(btnRegister);
             pnlLogin.Controls.Add(btnLogin);
             pnlLogin.Controls.Add(label10);
             pnlLogin.Controls.Add(chkRemember);
@@ -149,7 +149,7 @@
             pnlLogin.Controls.Add(textBox1);
             pnlLogin.Controls.Add(txtStudentNumber);
             pnlLogin.Controls.Add(lblUserType);
-            pnlLogin.Controls.Add(cmbUserType);
+            pnlLogin.Controls.Add(cmbRole);
             pnlLogin.Controls.Add(label8);
             pnlLogin.Controls.Add(label7);
             pnlLogin.Dock = DockStyle.Fill;
@@ -172,19 +172,19 @@
             lblNoAccount.TabIndex = 13;
             lblNoAccount.Text = "Don't have an account?";
             // 
-            // btnCreateAccount
+            // btnRegister
             // 
-            btnCreateAccount.BackColor = Color.Blue;
-            btnCreateAccount.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnCreateAccount.ForeColor = Color.White;
-            btnCreateAccount.Location = new Point(203, 604);
-            btnCreateAccount.Margin = new Padding(3, 4, 3, 4);
-            btnCreateAccount.Name = "btnCreateAccount";
-            btnCreateAccount.Size = new Size(337, 40);
-            btnCreateAccount.TabIndex = 12;
-            btnCreateAccount.Text = "CREATE ACCOUNT";
-            btnCreateAccount.UseVisualStyleBackColor = false;
-            btnCreateAccount.Click += btnCreateAccount_Click;
+            btnRegister.BackColor = Color.Blue;
+            btnRegister.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnRegister.ForeColor = Color.White;
+            btnRegister.Location = new Point(203, 604);
+            btnRegister.Margin = new Padding(3, 4, 3, 4);
+            btnRegister.Name = "btnRegister";
+            btnRegister.Size = new Size(337, 40);
+            btnRegister.TabIndex = 12;
+            btnRegister.Text = "REGISTER";
+            btnRegister.UseVisualStyleBackColor = false;
+            btnRegister.Click += btnRegister_Click;
             // 
             // btnLogin
             // 
@@ -274,15 +274,15 @@
             lblUserType.TabIndex = 3;
             lblUserType.Text = "User Type";
             // 
-            // cmbUserType
+            // cmbRole
             // 
-            cmbUserType.FormattingEnabled = true;
-            cmbUserType.Items.AddRange(new object[] { "Student", "Company", "Department/Coordinator" });
-            cmbUserType.Location = new Point(205, 195);
-            cmbUserType.Margin = new Padding(3, 4, 3, 4);
-            cmbUserType.Name = "cmbUserType";
-            cmbUserType.Size = new Size(339, 28);
-            cmbUserType.TabIndex = 2;
+            cmbRole.FormattingEnabled = true;
+            cmbRole.Items.AddRange(new object[] { "Student", "Company", "Department/Coordinator" });
+            cmbRole.Location = new Point(205, 195);
+            cmbRole.Margin = new Padding(3, 4, 3, 4);
+            cmbRole.Name = "cmbRole";
+            cmbRole.Size = new Size(339, 28);
+            cmbRole.TabIndex = 2;
             // 
             // label8
             // 
@@ -341,7 +341,7 @@
         private Panel pnlLogin;
         private Label label7;
         private Label lblUserType;
-        private ComboBox cmbUserType;
+        private ComboBox cmbRole;
         private Label label8;
         private TextBox textBox1;
         private Label txtStudentNumber;
@@ -351,6 +351,6 @@
         private CheckBox chkRemember;
         private Button btnLogin;
         private Label lblNoAccount;
-        private Button btnCreateAccount;
+        private Button btnRegister;
     }
 }

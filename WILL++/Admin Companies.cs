@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace WILL__
 {
-    public partial class NotificationsForm : Form
+    public partial class Admin_Companies : Form
     {
-        public NotificationsForm()
+        public Admin_Companies()
         {
             InitializeComponent();
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

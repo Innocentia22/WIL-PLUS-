@@ -18,7 +18,7 @@ namespace WILL__
         private void btnLogin_Click(object sender, EventArgs e)
         {
             // Get values from the form
-            string userType = cmbUserType.Text.Trim();
+            string userType = cmbRole.Text.Trim();
             string studentNumber = txtStudentNumber.Text.Trim();
             string password = txtPassword.Text;
 
@@ -30,7 +30,7 @@ namespace WILL__
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Warning);
 
-                cmbUserType.Focus();
+                cmbRole.Focus();
                 return;
             }
             // Validate Student Number
@@ -113,16 +113,42 @@ namespace WILL__
                     MessageBoxIcon.Error);
             }
         }
-        private void btnCreateAccount_Click(object sender, EventArgs e)
+        private void btnRegister_Click(object sender, EventArgs e)
         {
-            CreateAccountForm createAccount = new CreateAccountForm();
-            createAccount.Show();
-            this.Hide();
+            // First check if they selected anything
+            if (cmbRole.SelectedItem == null)
+            {
+                MessageBox.Show("Please select a user type.");
+                return;
+            }
+
+            string role = cmbRole.SelectedItem.ToString();
+
+            if (role == "Student")
+            {
+                new Student_register().Show();
+                this.Hide();
+            }
+
+            else if (role == "Coordinator")
+            {
+                new coordinator_register().Show();
+                this.Hide();
+            }
+
+            else if (role == "Admin")
+            {
+               new Admin_register().Show();
+                this.Hide();
+            }
+
+
         }
+
 
         private void label10_Click(object sender, EventArgs e)
         {
-            string userType = cmbUserType.Text.Trim();
+            string userType = cmbRole.Text.Trim();
             string studentNumber = txtStudentNumber.Text.Trim();
 
 
@@ -135,7 +161,7 @@ namespace WILL__
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning);
 
-                cmbUserType.Focus();
+                cmbRole.Focus();
                 return;
             }
             //  Validate Student Number
@@ -193,12 +219,5 @@ namespace WILL__
         }
     }
 
-    internal class CreateAccountForm
-    {
-        internal void Show()
-        {
-            CreateAccountForm createAccount = new CreateAccountForm();
-
-        }
-    }
+   
 }
