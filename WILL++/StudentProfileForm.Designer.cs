@@ -56,7 +56,7 @@
             label10 = new Label();
             label11 = new Label();
             label12 = new Label();
-            comboBox1 = new ComboBox();
+            cmbYear = new ComboBox();
             label13 = new Label();
             cmbDiscipline = new ComboBox();
             pnlSidebar.SuspendLayout();
@@ -380,16 +380,16 @@
             label12.TabIndex = 28;
             label12.Text = "Discipline";
             // 
-            // comboBox1
+            // cmbYear
             // 
-            comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Items.AddRange(new object[] { "First Year ", "Second Year", "Third Year ", "Fourth Year" });
-            comboBox1.Location = new Point(933, 713);
-            comboBox1.Margin = new Padding(3, 4, 3, 4);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(342, 28);
-            comboBox1.TabIndex = 30;
+            cmbYear.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbYear.FormattingEnabled = true;
+            cmbYear.Items.AddRange(new object[] { "First Year ", "Second Year", "Third Year ", "Fourth Year" });
+            cmbYear.Location = new Point(933, 713);
+            cmbYear.Margin = new Padding(3, 4, 3, 4);
+            cmbYear.Name = "cmbYear";
+            cmbYear.Size = new Size(342, 28);
+            cmbYear.TabIndex = 30;
             // 
             // label13
             // 
@@ -416,7 +416,7 @@
             ClientSize = new Size(1353, 881);
             Controls.Add(cmbDiscipline);
             Controls.Add(label13);
-            Controls.Add(comboBox1);
+            Controls.Add(cmbYear);
             Controls.Add(label12);
             Controls.Add(label11);
             Controls.Add(label10);
@@ -476,10 +476,8 @@
         private Label label10;
         private Label label11;
         private Label label12;
-        private ComboBox cmbDiscipline;
-        private ComboBox comboBox1;
+        private ComboBox cmbYear;
         private Label label13;
         private ComboBox comboBox2;
-        private ComboBox cmbDiscipline;
     }
 }

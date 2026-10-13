@@ -36,6 +36,8 @@
             label2 = new Label();
             label1 = new Label();
             pnlLogin = new Panel();
+            label11 = new Label();
+            button1 = new Button();
             lblNoAccount = new Label();
             btnRegister = new Button();
             btnLogin = new Button();
@@ -43,8 +45,9 @@
             chkRemember = new CheckBox();
             label9 = new Label();
             txtPassword = new TextBox();
-            textBox1 = new TextBox();
-            txtStudentNumber = new Label();
+            txtEmailInput = new TextBox();
+            txtStudentNumberInput = new TextBox();
+            lblStudentNumber = new Label();
             lblUserType = new Label();
             cmbRole = new ComboBox();
             label8 = new Label();
@@ -64,10 +67,9 @@
             pnlBrand.Controls.Add(label1);
             pnlBrand.Dock = DockStyle.Left;
             pnlBrand.Location = new Point(0, 0);
-            pnlBrand.Margin = new Padding(3, 4, 3, 4);
-            pnlBrand.MaximumSize = new Size(629, 0);
+            pnlBrand.MaximumSize = new Size(550, 0);
             pnlBrand.Name = "pnlBrand";
-            pnlBrand.Size = new Size(457, 804);
+            pnlBrand.Size = new Size(465, 562);
             pnlBrand.TabIndex = 0;
             // 
             // label6
@@ -75,9 +77,9 @@
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
             label6.ForeColor = Color.WhiteSmoke;
-            label6.Location = new Point(30, 453);
+            label6.Location = new Point(26, 340);
             label6.Name = "label6";
-            label6.Size = new Size(413, 28);
+            label6.Size = new Size(323, 21);
             label6.TabIndex = 5;
             label6.Text = "\"Turning Learning into real opportunities\"";
             // 
@@ -86,9 +88,9 @@
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold | FontStyle.Italic);
             label5.ForeColor = Color.WhiteSmoke;
-            label5.Location = new Point(104, 381);
+            label5.Location = new Point(91, 286);
             label5.Name = "label5";
-            label5.Size = new Size(61, 23);
+            label5.Size = new Size(45, 17);
             label5.TabIndex = 4;
             label5.Text = "*Grow";
             // 
@@ -97,9 +99,9 @@
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold | FontStyle.Italic);
             label4.ForeColor = Color.White;
-            label4.Location = new Point(104, 297);
+            label4.Location = new Point(91, 223);
             label4.Name = "label4";
-            label4.Size = new Size(64, 23);
+            label4.Size = new Size(50, 17);
             label4.TabIndex = 3;
             label4.Text = "*Apply";
             // 
@@ -108,9 +110,9 @@
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
             label3.ForeColor = Color.White;
-            label3.Location = new Point(104, 220);
+            label3.Location = new Point(91, 165);
             label3.Name = "label3";
-            label3.Size = new Size(87, 23);
+            label3.Size = new Size(67, 17);
             label3.TabIndex = 2;
             label3.Text = "* Connect";
             // 
@@ -119,9 +121,9 @@
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 18F, FontStyle.Italic, GraphicsUnit.Point, 0);
             label2.ForeColor = Color.White;
-            label2.Location = new Point(87, 111);
+            label2.Location = new Point(76, 83);
             label2.Name = "label2";
-            label2.Size = new Size(245, 82);
+            label2.Size = new Size(196, 64);
             label2.TabIndex = 1;
             label2.Text = "Work-Intergrated\r\n Learning Plus";
             // 
@@ -130,15 +132,17 @@
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 42F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.White;
-            label1.Location = new Point(87, 12);
+            label1.Location = new Point(76, 9);
             label1.Name = "label1";
-            label1.Size = new Size(269, 93);
+            label1.Size = new Size(215, 74);
             label1.TabIndex = 1;
             label1.Text = "WIL++";
             // 
             // pnlLogin
             // 
             pnlLogin.BackColor = Color.White;
+            pnlLogin.Controls.Add(label11);
+            pnlLogin.Controls.Add(button1);
             pnlLogin.Controls.Add(lblNoAccount);
             pnlLogin.Controls.Add(btnRegister);
             pnlLogin.Controls.Add(btnLogin);
@@ -146,29 +150,49 @@
             pnlLogin.Controls.Add(chkRemember);
             pnlLogin.Controls.Add(label9);
             pnlLogin.Controls.Add(txtPassword);
-            pnlLogin.Controls.Add(textBox1);
-            pnlLogin.Controls.Add(txtStudentNumber);
+            pnlLogin.Controls.Add(txtEmailInput);
+            pnlLogin.Controls.Add(txtStudentNumberInput);
+            pnlLogin.Controls.Add(lblStudentNumber);
             pnlLogin.Controls.Add(lblUserType);
             pnlLogin.Controls.Add(cmbRole);
             pnlLogin.Controls.Add(label8);
             pnlLogin.Controls.Add(label7);
             pnlLogin.Dock = DockStyle.Fill;
-            pnlLogin.Location = new Point(457, 0);
-            pnlLogin.Margin = new Padding(3, 4, 3, 4);
-            pnlLogin.MaximumSize = new Size(1257, 867);
-            pnlLogin.MinimumSize = new Size(1257, 867);
+            pnlLogin.Location = new Point(0, 0);
+            pnlLogin.MaximumSize = new Size(1100, 650);
+            pnlLogin.MinimumSize = new Size(1100, 650);
             pnlLogin.Name = "pnlLogin";
-            pnlLogin.Size = new Size(1257, 867);
+            pnlLogin.Size = new Size(1100, 650);
             pnlLogin.TabIndex = 1;
             pnlLogin.Paint += pnlLogin_Paint;
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Font = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            label11.Location = new Point(600, 165);
+            label11.Name = "label11";
+            label11.Size = new Size(81, 15);
+            label11.TabIndex = 15;
+            label11.Text = "Email Address";
+            // 
+            // button1
+            // 
+            button1.Location = new Point(37, 291);
+            button1.Name = "button1";
+            button1.Size = new Size(75, 23);
+            button1.TabIndex = 14;
+            button1.Text = "Test Database";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // lblNoAccount
             // 
             lblNoAccount.AutoSize = true;
             lblNoAccount.Font = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point, 0);
-            lblNoAccount.Location = new Point(304, 580);
+            lblNoAccount.Location = new Point(686, 453);
             lblNoAccount.Name = "lblNoAccount";
-            lblNoAccount.Size = new Size(159, 20);
+            lblNoAccount.Size = new Size(131, 15);
             lblNoAccount.TabIndex = 13;
             lblNoAccount.Text = "Don't have an account?";
             // 
@@ -177,10 +201,9 @@
             btnRegister.BackColor = Color.Blue;
             btnRegister.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnRegister.ForeColor = Color.White;
-            btnRegister.Location = new Point(203, 604);
-            btnRegister.Margin = new Padding(3, 4, 3, 4);
+            btnRegister.Location = new Point(602, 471);
             btnRegister.Name = "btnRegister";
-            btnRegister.Size = new Size(337, 40);
+            btnRegister.Size = new Size(295, 30);
             btnRegister.TabIndex = 12;
             btnRegister.Text = "REGISTER";
             btnRegister.UseVisualStyleBackColor = false;
@@ -192,10 +215,9 @@
             btnLogin.FlatStyle = FlatStyle.Flat;
             btnLogin.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnLogin.ForeColor = Color.White;
-            btnLogin.Location = new Point(203, 467);
-            btnLogin.Margin = new Padding(3, 4, 3, 4);
+            btnLogin.Location = new Point(605, 379);
             btnLogin.Name = "btnLogin";
-            btnLogin.Size = new Size(343, 60);
+            btnLogin.Size = new Size(300, 45);
             btnLogin.TabIndex = 11;
             btnLogin.Text = "LOGIN";
             btnLogin.UseVisualStyleBackColor = false;
@@ -205,9 +227,9 @@
             // 
             label10.AutoSize = true;
             label10.Font = new Font("Segoe UI", 9F, FontStyle.Italic | FontStyle.Underline, GraphicsUnit.Point, 0);
-            label10.Location = new Point(432, 433);
+            label10.Location = new Point(799, 348);
             label10.Name = "label10";
-            label10.Size = new Size(120, 20);
+            label10.Size = new Size(98, 15);
             label10.TabIndex = 10;
             label10.Text = "Forgot password?";
             label10.Click += label10_Click;
@@ -215,10 +237,9 @@
             // chkRemember
             // 
             chkRemember.AutoSize = true;
-            chkRemember.Location = new Point(203, 433);
-            chkRemember.Margin = new Padding(3, 4, 3, 4);
+            chkRemember.Location = new Point(602, 344);
             chkRemember.Name = "chkRemember";
-            chkRemember.Size = new Size(129, 24);
+            chkRemember.Size = new Size(104, 19);
             chkRemember.TabIndex = 9;
             chkRemember.Text = "Remember me";
             chkRemember.UseVisualStyleBackColor = true;
@@ -228,60 +249,67 @@
             // 
             label9.AutoSize = true;
             label9.Font = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point, 0);
-            label9.Location = new Point(203, 349);
+            label9.Location = new Point(600, 288);
             label9.Name = "label9";
-            label9.Size = new Size(70, 20);
+            label9.Size = new Size(57, 15);
             label9.TabIndex = 8;
             label9.Text = "Password";
             // 
             // txtPassword
             // 
-            txtPassword.Location = new Point(205, 373);
-            txtPassword.Margin = new Padding(3, 4, 3, 4);
+            txtPassword.Location = new Point(600, 315);
             txtPassword.Name = "txtPassword";
             txtPassword.PlaceholderText = "Password";
-            txtPassword.Size = new Size(339, 27);
+            txtPassword.Size = new Size(297, 23);
             txtPassword.TabIndex = 7;
             txtPassword.UseSystemPasswordChar = true;
             // 
-            // textBox1
+            // txtEmailInput
             // 
-            textBox1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBox1.Location = new Point(202, 285);
-            textBox1.Margin = new Padding(3, 4, 3, 4);
-            textBox1.Name = "textBox1";
-            textBox1.PlaceholderText = "Student Number";
-            textBox1.Size = new Size(337, 27);
-            textBox1.TabIndex = 6;
+            txtEmailInput.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtEmailInput.Location = new Point(600, 185);
+            txtEmailInput.Name = "txtEmailInput";
+            txtEmailInput.PlaceholderText = "Email address";
+            txtEmailInput.Size = new Size(295, 23);
+            txtEmailInput.TabIndex = 6;
             // 
-            // txtStudentNumber
+            // txtStudentNumberInput
             // 
-            txtStudentNumber.AutoSize = true;
-            txtStudentNumber.Font = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point, 0);
-            txtStudentNumber.Location = new Point(202, 261);
-            txtStudentNumber.Name = "txtStudentNumber";
-            txtStudentNumber.Size = new Size(113, 20);
-            txtStudentNumber.TabIndex = 5;
-            txtStudentNumber.Text = "Student Number";
+            txtStudentNumberInput.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtStudentNumberInput.Location = new Point(600, 246);
+            txtStudentNumberInput.Name = "txtStudentNumberInput";
+            txtStudentNumberInput.PlaceholderText = "Student Number";
+            txtStudentNumberInput.Size = new Size(295, 23);
+            txtStudentNumberInput.TabIndex = 6;
+            // 
+            // lblStudentNumber
+            // 
+            lblStudentNumber.AutoSize = true;
+            lblStudentNumber.Font = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            lblStudentNumber.Location = new Point(600, 228);
+            lblStudentNumber.Name = "lblStudentNumber";
+            lblStudentNumber.Size = new Size(94, 15);
+            lblStudentNumber.TabIndex = 5;
+            lblStudentNumber.Text = "Student Number";
             // 
             // lblUserType
             // 
             lblUserType.AutoSize = true;
             lblUserType.Font = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point, 0);
-            lblUserType.Location = new Point(202, 171);
+            lblUserType.Location = new Point(598, 121);
             lblUserType.Name = "lblUserType";
-            lblUserType.Size = new Size(71, 20);
+            lblUserType.Size = new Size(58, 15);
             lblUserType.TabIndex = 3;
             lblUserType.Text = "User Type";
             // 
             // cmbRole
             // 
+            cmbRole.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbRole.FormattingEnabled = true;
             cmbRole.Items.AddRange(new object[] { "Student", "Company", "Department/Coordinator" });
-            cmbRole.Location = new Point(205, 195);
-            cmbRole.Margin = new Padding(3, 4, 3, 4);
+            cmbRole.Location = new Point(598, 139);
             cmbRole.Name = "cmbRole";
-            cmbRole.Size = new Size(339, 28);
+            cmbRole.Size = new Size(297, 23);
             cmbRole.TabIndex = 2;
             // 
             // label8
@@ -290,9 +318,9 @@
             label8.BackColor = Color.Transparent;
             label8.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label8.ForeColor = Color.Gray;
-            label8.Location = new Point(202, 111);
+            label8.Location = new Point(686, 58);
             label8.Name = "label8";
-            label8.Size = new Size(220, 32);
+            label8.Size = new Size(173, 25);
             label8.TabIndex = 1;
             label8.Text = "Sign in to continue";
             // 
@@ -300,25 +328,24 @@
             // 
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI", 24F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            label7.Location = new Point(190, 25);
+            label7.Location = new Point(614, 13);
             label7.Name = "label7";
-            label7.Size = new Size(384, 54);
+            label7.Size = new Size(310, 45);
             label7.TabIndex = 0;
             label7.Text = "Welcome to WIL++";
             // 
             // LoginForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(0, 31, 63);
-            ClientSize = new Size(1237, 804);
-            Controls.Add(pnlLogin);
+            ClientSize = new Size(1084, 562);
             Controls.Add(pnlBrand);
+            Controls.Add(pnlLogin);
             FormBorderStyle = FormBorderStyle.FixedSingle;
-            Margin = new Padding(3, 4, 3, 4);
             MaximizeBox = false;
-            MaximumSize = new Size(1255, 851);
-            MinimumSize = new Size(1255, 851);
+            MaximumSize = new Size(1100, 648);
+            MinimumSize = new Size(1100, 554);
             Name = "LoginForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Login -WIL++";
@@ -343,14 +370,18 @@
         private Label lblUserType;
         private ComboBox cmbRole;
         private Label label8;
-        private TextBox textBox1;
-        private Label txtStudentNumber;
+        private TextBox txtStudentNumberInput;
+        private Label lblStudentNumber;
         private Label label9;
         private TextBox txtPassword;
+        private Label lblEmail;
+        private TextBox txtEmailInput;
         private Label label10;
         private CheckBox chkRemember;
         private Button btnLogin;
         private Label lblNoAccount;
         private Button btnRegister;
+        private Button button1;
+        private Label label11;
     }
 }

@@ -15,7 +15,7 @@ namespace WILL__
 
         private TextBox txtFullName, txtStudentNumber;
         private TextBox txtEmail, txtPhone;
-        private ComboBox cmbDiscipline, cmbYear;
+        private ComboBox cmbDiscipline;
         private Button btnSave, btnCancel;
 
         private readonly Color navy = Color.FromArgb(18, 35, 65);
@@ -27,6 +27,48 @@ namespace WILL__
         {
             InitializeComponent();
             BuildProfilePage();
+        }
+
+        // Public method used by StudentDashboard to load and display student profile
+        public void LoadProfile(int studentUserId)
+        {
+            try
+            {
+                var auth = new WIL__.AuthRepository();
+                // attempt to locate student personal details in dbo.Students
+                using (var con = new WIL__.DbConnection().GetConnection())
+                {
+                    con.Open();
+                    using (var cmd = con.CreateCommand())
+                    {
+                        cmd.CommandText = @"SELECT s.FirstName, s.LastName, s.StudentNumber, s.PhoneNumber, u.Email, s.Discipline, s.YearOfStudy
+FROM dbo.Students s
+LEFT JOIN dbo.Users u ON s.UserID = u.UserID
+WHERE s.UserID = @UserID";
+                        var p = cmd.CreateParameter();
+                        p.ParameterName = "@UserID";
+                        p.Value = studentUserId;
+                        cmd.Parameters.Add(p);
+
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                string first = reader.IsDBNull(reader.GetOrdinal("FirstName")) ? string.Empty : reader.GetString(reader.GetOrdinal("FirstName"));
+                                string last = reader.IsDBNull(reader.GetOrdinal("LastName")) ? string.Empty : reader.GetString(reader.GetOrdinal("LastName"));
+                                txtFullName.Text = (first + " " + last).Trim();
+                                txtStudentNumber.Text = reader.IsDBNull(reader.GetOrdinal("StudentNumber")) ? string.Empty : reader.GetString(reader.GetOrdinal("StudentNumber"));
+                                txtPhone.Text = reader.IsDBNull(reader.GetOrdinal("PhoneNumber")) ? string.Empty : reader.GetString(reader.GetOrdinal("PhoneNumber"));
+                                txtEmail.Text = reader.IsDBNull(reader.GetOrdinal("Email")) ? string.Empty : reader.GetString(reader.GetOrdinal("Email"));
+                                string discipline = reader.IsDBNull(reader.GetOrdinal("Discipline")) ? string.Empty : reader.GetString(reader.GetOrdinal("Discipline"));
+                                if (!string.IsNullOrWhiteSpace(discipline) && cmbDiscipline.Items.Contains(discipline))
+                                    cmbDiscipline.SelectedItem = discipline;
+                            }
+                        }
+                    }
+                }
+            }
+            catch { }
         }
 
         private void BuildProfilePage()
@@ -183,11 +225,12 @@ namespace WILL__
             AddHeading(main, "Academic Information", 445);
 
             AddLabel(main, "Discipline", 250, 490);
-            cmbDiscipline = new ComboBox();
+            // use Designer-declared cmbDiscipline control; configure and ensure it's parented to 'main'
             cmbDiscipline.Location = new Point(250, 520);
             cmbDiscipline.Size = new Size(310, 32);
             cmbDiscipline.DropDownStyle = ComboBoxStyle.DropDownList;
 
+            cmbDiscipline.Items.Clear();
             cmbDiscipline.Items.AddRange(new string[]
             {
                 "Electrical Engineering",
@@ -198,14 +241,16 @@ namespace WILL__
             });
 
             cmbDiscipline.SelectedItem = "Electrical Engineering";
-            main.Controls.Add(cmbDiscipline);
+            if (cmbDiscipline.Parent != main)
+                main.Controls.Add(cmbDiscipline);
 
             AddLabel(main, "Year of Study", 590, 490);
-            cmbYear = new ComboBox();
+            // use Designer-declared cmbYear control; configure and ensure it's parented to 'main'
             cmbYear.Location = new Point(590, 520);
             cmbYear.Size = new Size(310, 32);
             cmbYear.DropDownStyle = ComboBoxStyle.DropDownList;
 
+            cmbYear.Items.Clear();
             cmbYear.Items.AddRange(new string[]
             {
                 "1st Year",
@@ -215,7 +260,8 @@ namespace WILL__
             });
 
             cmbYear.SelectedIndex = 1;
-            main.Controls.Add(cmbYear);
+            if (cmbYear.Parent != main)
+                main.Controls.Add(cmbYear);
 
             // Save button
             btnSave = new Button();
@@ -316,5 +362,3 @@ namespace WILL__
     }
 }
 
-}
-}

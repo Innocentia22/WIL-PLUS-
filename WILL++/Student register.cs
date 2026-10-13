@@ -8,11 +8,15 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.Data.SqlClient;
+using WIL__;
 
 namespace WILL__
 {
     public partial class Student_register : Form
     {
+        private readonly AuthRepository repository = new AuthRepository();
+
         public Student_register()
         {
             InitializeComponent();
@@ -119,26 +123,53 @@ namespace WILL__
             string course = cmbCourse.SelectedItem.ToString();
             string yearOfStudy = cmbYearOfStudy.SelectedItem.ToString();
 
-            // IMPORTANT:
-            // Save the student details to your database here.
-            // Do not show success until the database save succeeds.
+            // Save to database
+            string discipline = cmbCourse.SelectedItem.ToString();
+            string yearText = cmbYearOfStudy.SelectedItem.ToString();
+            int year = 1;
+            // extract leading digit
+            var m = System.Text.RegularExpressions.Regex.Match(yearText, "(\\d+)");
+            if (m.Success) int.TryParse(m.Groups[1].Value, out year);
 
-            MessageBox.Show(
-                "Student registration details validated successfully!",
-                "Success",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information);
+            try
+            {
+                repository.RegisterStudent(
+                    txtFirstName.Text.Trim(),
+                    txtSurname.Text.Trim(),
+                    txtStudentNo.Text.Trim(),
+                    txtEmail.Text.Trim(),
+                    "", // phone not collected in the form
+                    txtPassword.Text,
+                    discipline,
+                    year
+                );
 
-            // 7. Return to Login Form
-            LoginForm login = new LoginForm();
-            login.Show();
+                MessageBox.Show(
+                    "Student registered successfully!",
+                    "Success",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
 
-            this.Close();
+                // Return to Login Form
+                var login = new LoginForm();
+                login.Show();
+                this.Close();
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(
+                    "Registration failed. Database error:\n" + ex.Message,
+                    "Database Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
         }
 
-
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            var login = new LoginForm();
+            login.Show();
+            this.Close();
+        }
     }
 }
-
-       
-

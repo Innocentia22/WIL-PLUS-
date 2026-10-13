@@ -57,9 +57,18 @@
             txtPassword = new TextBox();
             txtConfirmPassword = new TextBox();
             btnRegister = new Button();
+            btnBack = new Button();
             label21 = new Label();
             txtStudentNo = new TextBox();
             cmbCourse = new ComboBox();
+            // 
+            // btnBack
+            // 
+            btnBack.Location = new Point(820, 640);
+            btnBack.Name = "btnBack";
+            btnBack.Size = new Size(120, 36);
+            btnBack.Text = "Back";
+            btnBack.Click += btnBack_Click;
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -435,5 +444,6 @@
         private Label label21;
         private TextBox txtStudentNo;
         private ComboBox cmbCourse;
+        private Button btnBack;
     }
 }

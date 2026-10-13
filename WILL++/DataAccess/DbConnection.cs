@@ -12,6 +12,7 @@ namespace WIL__
             return new SqlConnection(connectionString);
         }
 
+
         public bool TestConnection()
         {
             try
@@ -22,10 +23,17 @@ namespace WIL__
                     return true;
                 }
             }
-            catch
+            catch (Exception ex)
             {
+                MessageBox.Show(
+                    "Database connection failed:\n" + ex.Message,
+                    "Database Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+
                 return false;
             }
         }
+
     }
 }

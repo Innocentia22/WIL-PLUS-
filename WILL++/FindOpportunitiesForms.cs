@@ -12,25 +12,24 @@ namespace WILL__
 {
     public partial class FindOpportunitiesForms : Form
     {
+        private readonly WIL__.AuthenticatedUser studentUser;
+
         public FindOpportunitiesForms()
         {
             InitializeComponent();
+            SetupOpportunities();
         }
 
-
-        private class Opportunity
+        public FindOpportunitiesForms(WIL__.AuthenticatedUser user) : this()
         {
-            public string Company { get; set; }
-            public string Position { get; set; }
-            public string Discipline { get; set; }
-            public string Type { get; set; }
-            public string Location { get; set; }
-            public string ClosingDate { get; set; }
-            public string Description { get; set; }
+            this.studentUser = user;
         }
 
-        private List<Opportunity> opportunities =
-            new List<Opportunity>();
+
+        // Use the repository Opportunity model when loading from DB
+        private List<WIL__.Opportunity> opportunities = new List<WIL__.Opportunity>();
+        // Track opportunities the student has already applied to for immediate UI feedback
+        private System.Collections.Generic.HashSet<int> appliedOpportunityIds = new System.Collections.Generic.HashSet<int>();
 
         private void SetupOpportunities()
         {
@@ -86,56 +85,32 @@ namespace WILL__
         {
             opportunities.Clear();
 
-            // DEMONSTRATION DATA ONLY.
-            // Replace these examples with real database records.
-
-            opportunities.Add(new Opportunity
+            // Load active opportunities from the database
+            var repo = new WIL__.OpportunitiesRepository();
+            try
             {
-                Company = "Example Electrical Ltd",
-                Position = "Electrical Engineering Intern",
-                Discipline = "Electrical Engineering",
-                Type = "WIL",
-                Location = "East London",
-                ClosingDate = "30 November 2026",
-                Description =
-                    "Practical electrical engineering workplace experience."
-            });
+                opportunities = repo.GetAllActive();
 
-            opportunities.Add(new Opportunity
+                // If a student is logged in, load their existing applications for UI state
+                appliedOpportunityIds.Clear();
+                if (studentUser != null)
+                {
+                    var appsRepo = new WIL__.ApplicationsRepository();
+                    var apps = appsRepo.GetByStudentUserId(studentUser.UserID);
+                    if (apps != null)
+                    {
+                        foreach (var a in apps)
+                        {
+                            appliedOpportunityIds.Add(a.OpportunityID);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
             {
-                Company = "Example Civil Works",
-                Position = "Civil Engineering Trainee",
-                Discipline = "Civil Engineering",
-                Type = "In-Service Training",
-                Location = "Mthatha",
-                ClosingDate = "15 December 2026",
-                Description =
-                    "Civil construction and site experience."
-            });
-
-            opportunities.Add(new Opportunity
-            {
-                Company = "Example Mechanical Services",
-                Position = "Mechanical Engineering Intern",
-                Discipline = "Mechanical Engineering",
-                Type = "WIL",
-                Location = "Gqeberha",
-                ClosingDate = "20 December 2026",
-                Description =
-                    "Mechanical maintenance and workshop experience."
-            });
-
-            opportunities.Add(new Opportunity
-            {
-                Company = "Example Engineering Group",
-                Position = "Electrical Engineering Trainee",
-                Discipline = "Electrical Engineering",
-                Type = "In-Service Training",
-                Location = "Cape Town",
-                ClosingDate = "10 December 2026",
-                Description =
-                    "Electrical systems and maintenance training."
-            });
+                MessageBox.Show("Failed to load opportunities: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                opportunities = new List<WIL__.Opportunity>();
+            }
         }
 
         private void DisplayOpportunities()
@@ -153,29 +128,23 @@ namespace WILL__
 
             var results = opportunities.Where(o =>
                 (string.IsNullOrWhiteSpace(search) ||
-                 o.Company.IndexOf(search,
-                     StringComparison.OrdinalIgnoreCase) >= 0 ||
-                 o.Position.IndexOf(search,
-                     StringComparison.OrdinalIgnoreCase) >= 0 ||
-                 o.Discipline.IndexOf(search,
-                     StringComparison.OrdinalIgnoreCase) >= 0) &&
+                 (o.Title ?? "").IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0 ||
+                 (o.Description ?? "").IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0) &&
 
-                (discipline == "All Disciplines" ||
-                 o.Discipline == discipline) &&
+                (discipline == "All Disciplines" || string.IsNullOrWhiteSpace(o.Course) || o.Course == discipline) &&
 
-                (type == "All Types" || o.Type == type) &&
+                (type == "All Types" || string.IsNullOrWhiteSpace(o.Industry) || o.Industry == type) &&
 
-                (location == "All Locations" ||
-                 o.Location == location)
+                (location == "All Locations" || string.IsNullOrWhiteSpace(o.Location) || o.Location == location)
             ).ToList();
 
             flowLayoutPanelOpportunities.SuspendLayout();
             flowLayoutPanelOpportunities.Controls.Clear();
 
-            foreach (Opportunity opportunity in results)
+            foreach (WIL__.Opportunity opportunity in results)
             {
-                flowLayoutPanelOpportunities.Controls.Add(
-                    CreateOpportunityCard(opportunity));
+                var card = CreateOpportunityCard(opportunity);
+                flowLayoutPanelOpportunities.Controls.Add(card);
             }
 
             if (results.Count == 0)
@@ -194,7 +163,7 @@ namespace WILL__
             flowLayoutPanelOpportunities.ResumeLayout();
         }
 
-        private Panel CreateOpportunityCard(Opportunity opportunity)
+        private Panel CreateOpportunityCard(WIL__.Opportunity opportunity)
         {
             Panel card = new Panel
             {
@@ -207,9 +176,22 @@ namespace WILL__
                 Padding = new Padding(10)
             };
 
+            // Resolve company name from UserID when possible
+            string companyName = "Company";
+            try
+            {
+                var auth = new WIL__.AuthRepository();
+                var profile = auth.GetCompanyByUserId(opportunity.UserID);
+                if (profile != null && !string.IsNullOrWhiteSpace(profile.CompanyName))
+                    companyName = profile.CompanyName;
+                else
+                    companyName = "Company #" + opportunity.UserID;
+            }
+            catch { /* ignore profile lookup errors */ }
+
             Label company = new Label
             {
-                Text = opportunity.Company,
+                Text = companyName,
                 Location = new Point(12, 10),
                 AutoSize = true,
                 Font = new Font("Segoe UI", 11, FontStyle.Bold)
@@ -217,22 +199,27 @@ namespace WILL__
 
             Label position = new Label
             {
-                Text = opportunity.Position,
+                Text = opportunity.Title,
                 Location = new Point(12, 35),
                 AutoSize = true
             };
 
+            // Build details from available fields
+            var parts = new List<string>();
+            if (!string.IsNullOrWhiteSpace(opportunity.Course)) parts.Add(opportunity.Course);
+            if (!string.IsNullOrWhiteSpace(opportunity.Industry)) parts.Add(opportunity.Industry);
+            if (!string.IsNullOrWhiteSpace(opportunity.Location)) parts.Add(opportunity.Location);
+
             Label details = new Label
             {
-                Text = opportunity.Discipline + " | " +
-                       opportunity.Type + " | " + opportunity.Location,
+                Text = string.Join(" | ", parts),
                 Location = new Point(12, 60),
                 AutoSize = true
             };
 
             Label closing = new Label
             {
-                Text = "Closing date: " + opportunity.ClosingDate,
+                Text = "Closing date: " + (opportunity.ClosingDate.HasValue ? opportunity.ClosingDate.Value.ToString("yyyy/MM/dd") : "N/A"),
                 Location = new Point(12, 85),
                 AutoSize = true
             };
@@ -248,16 +235,76 @@ namespace WILL__
                 FlatStyle = FlatStyle.Flat
             };
 
+            Button applyButton = new Button
+            {
+                Name = "btnApply",
+                Text = "Apply",
+                Location = new Point(card.Width - 180, 95),
+                Size = new Size(75, 30),
+                Anchor = AnchorStyles.Right | AnchorStyles.Bottom,
+                BackColor = Color.SeaGreen,
+                ForeColor = Color.White,
+                FlatStyle = FlatStyle.Flat
+            };
+
+            // If the student already applied, show applied state and disable apply
+            if (studentUser != null && appliedOpportunityIds.Contains(opportunity.OpportunityID))
+            {
+                applyButton.Text = "Applied";
+                applyButton.Enabled = false;
+                applyButton.BackColor = Color.Gray;
+            }
+
+            applyButton.Click += (s, e) =>
+            {
+                // if not logged in, prompt to login
+                if (studentUser == null)
+                {
+                    MessageBox.Show("Please login as a student to apply.", "Login Required", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                // Open application form for details and then record application
+                var appForm = new ApplicationForm();
+                if (appForm.ShowDialog(this) == DialogResult.OK)
+                {
+                    try
+                    {
+                        var appsRepo = new WIL__.ApplicationsRepository();
+
+                        // Prevent duplicate applications by this student for the same opportunity
+                        var existing = appsRepo.GetByStudentUserId(studentUser.UserID).Find(a => a.OpportunityID == opportunity.OpportunityID);
+                        if (existing != null)
+                        {
+                            MessageBox.Show("You have already applied for this opportunity.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            return;
+                        }
+
+                        int id = appsRepo.CreateApplication(opportunity.OpportunityID, studentUser.UserID);
+                        // Update UI state immediately: mark as applied and disable button
+                        appliedOpportunityIds.Add(opportunity.OpportunityID);
+                        applyButton.Text = "Applied";
+                        applyButton.Enabled = false;
+                        applyButton.BackColor = Color.Gray;
+                        MessageBox.Show("Application submitted.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Failed to submit application: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            };
+
             viewButton.Click += (s, e) =>
             {
                 MessageBox.Show(
-                    "Company: " + opportunity.Company +
-                    "\nPosition: " + opportunity.Position +
-                    "\nDiscipline: " + opportunity.Discipline +
-                    "\nType: " + opportunity.Type +
-                    "\nLocation: " + opportunity.Location +
-                    "\nClosing date: " + opportunity.ClosingDate +
-                    "\n\nDescription:\n" + opportunity.Description,
+                    "Company: " + companyName +
+                    "\nPosition: " + opportunity.Title +
+                    "\nCourse/Discipline: " + (opportunity.Course ?? "") +
+                    "\nType/Industry: " + (opportunity.Industry ?? "") +
+                    "\nLocation: " + (opportunity.Location ?? "") +
+                    "\nClosing date: " + (opportunity.ClosingDate.HasValue ? opportunity.ClosingDate.Value.ToString("yyyy/MM/dd") : "N/A") +
+                    "\n\nDescription:\n" + (opportunity.Description ?? ""),
                     "Opportunity Details",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
@@ -268,6 +315,11 @@ namespace WILL__
             card.Controls.Add(details);
             card.Controls.Add(closing);
             card.Controls.Add(viewButton);
+            card.Controls.Add(applyButton);
+
+            // Ensure controls layout after adding buttons
+            viewButton.BringToFront();
+            applyButton.BringToFront();
 
             return card;
         }
